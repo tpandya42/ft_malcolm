@@ -1,4 +1,4 @@
-NAME = ft_ping
+NAME = ft_malcolm
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
 
@@ -16,7 +16,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -lm
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INC_DIR)/ft_ping.h
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INC_DIR)/ft_malcolm.h
 	@mkdir -p $(OBJ_DIR)
 	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
 

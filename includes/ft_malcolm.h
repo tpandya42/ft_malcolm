@@ -10,6 +10,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <net/ethernet.h>
+#include <net/if.h>
 
 #define AFINET_LEN 4
 #define BUFFER_SIZE 42
@@ -35,13 +36,17 @@ typedef struct s_conf {
 typedef struct s_data {
     uint8_t source_ip[AFINET_LEN];
     uint8_t source_mac[ETH_ALEN];
-    uint8_t target_ip[AFINET_ALEN];
+    uint8_t target_ip[AFINET_LEN];
     uint8_t target_mac[ETH_ALEN];
+    // Might need variables to store ip and mac address in char * form.
     int sockfd;
     char iface[IF_NAMESIZE];
     bool    verbose;
 } t_data;
 
+
+// utils.c
+int     ft_strlen(const char *str);
 
 // parse.c
 t_data  parse_args(int argc, char **argv);
