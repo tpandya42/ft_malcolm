@@ -16,7 +16,7 @@ static int      is_valid_mac(const char *mac, uint8_t mac_bytes[6])
 {
     if (mac == NULL || *mac == '\0')
         return 1;
-    if (ft_strlen(mac) != 17)
+    if (strlen(mac) != 17)
         return 1;
 
     int     i = 0;
@@ -71,38 +71,37 @@ static  int     validate_args(const char **args, t_data *data)
     return 0;
 }
 
-t_data  parse_args(int argc, char **argv){
+int  parse_args(int argc, char **argv, t_data *data){
 
-    t_data  data;
-    memset(&data, 0, sizeof(data));
+    memset(data, 0, sizeof(*data));
     int opt;
     while ((opt = getopt(argc, argv, "vh")) != -1)
     {
         switch(opt)
         {
         case 'v':
-            data.verbose = true;
+            data->verbose = true;
             break;
         case 'h':
         default:
-            print_usage();
-            return ;
+//            print_usage();
+            return 1;
         }
     }
 
     if (argc - optind != 4)
     {
-        print_usage();
-        return ;
+//        print_usage();
+        return 1;
     }
 
     const char **args = (const char **)&argv[optind];
-    if (validate_args(args) != 0) {
-        return ;
+    if (validate_args(args, data) != 0) {
+        return 1;
     }
 /*    data.source_ip = args[0];
     data.source_mac = args[1];
     data.target_ip = args[2];
     data.target_mac= args[3]; */
-    return data;
+    return 0;
 }

@@ -49,6 +49,6 @@ typedef struct s_data {
 int     ft_strlen(const char *str);
 
 // parse.c
-t_data  parse_args(int argc, char **argv);
+int  parse_args(int argc, char **argv, t_data *data);
 
 #endif
