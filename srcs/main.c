@@ -9,7 +9,6 @@ int main(int argc, char **argv)
         fprintf(stderr, "parsing failed\n");
         return 1;
     }
-    int ret;
-    ret = ft_malcolm(data);
-    return (0);
+    signal(SIGINT, handle_sigint);
+    return (ft_malcolm(&data));
 }

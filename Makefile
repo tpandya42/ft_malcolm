@@ -5,6 +5,7 @@ CFLAGS = -Wall -Werror -Wextra
 SRC_DIR = srcs
 SRC = $(SRC_DIR)/main.c \
 	  $(SRC_DIR)/parse.c \
+	  $(SRC_DIR)/ft_malcolm.c
 
 OBJ_DIR = obj
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

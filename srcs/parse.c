@@ -55,7 +55,7 @@ static  int     validate_args(const char **args, t_data *data)
     const char  *target_ip = args[2];
     const char  *target_mac = args[3];
     // step 1: check if valid ip
-    if (!is_valid_ip(src_ip, data->source_ip)){
+    if (!js_valid_ip(src_ip, data->source_ip)){
         return 1;
     }
     if (!is_valid_ip(target_ip, data->target_ip)){
