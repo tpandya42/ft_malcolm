@@ -1,7 +1,6 @@
 #include "ft_malcolm.h"
 
 volatile sig_atomic_t g_running = 1;
-
 void    handle_sigint(int sig)
 {
     (void)sig;
@@ -55,9 +54,9 @@ static int create_arp_message(t_data *data, packet *pkt)
      * tha = target_mac, tpa = target_ip (we tell target this mapping)
      */
     memcpy(pkt->arp.arp_sha, data->source_mac, ETH_ALEN);
-    memcpy(pkt->arp.arp_spa, &data->source_ip, 4);
+    memcpy(pkt->arp.arp_spa, data->source_ip, 4);
     memcpy(pkt->arp.arp_tha, data->target_mac, ETH_ALEN);
-    memcpy(pkt->arp.arp_tpa, &data->target_ip, 4);
+    memcpy(pkt->arp.arp_tpa, data->target_ip, 4);
 
     return 0;
 }
@@ -117,6 +116,7 @@ int     ft_malcolm(t_data *data)
         return (-1);
     }
     // Step 3: Send gratuitous ARP replies
+    int counter=0;
     while (g_running)
     {
         ssize_t n = sendto(fd, &pkt, sizeof(pkt), 0, (struct sockaddr *)&sll, sizeof(sll));
@@ -124,6 +124,8 @@ int     ft_malcolm(t_data *data)
             perror("sendto");
             break;
         }
+        sleep(2);
+        printf("ARP reply sent: %d\n", counter++);
     }
     close(fd);
     return (0);

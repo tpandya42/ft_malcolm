@@ -7,6 +7,7 @@
 #include <signal.h>
 #include <arpa/inet.h>
 #include <stdio.h>
+#include <sys/socket.h>
 #include <stdint.h>
 #include <stdbool.h>
 #include <net/ethernet.h>

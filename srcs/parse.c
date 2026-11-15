@@ -6,7 +6,6 @@ static int      is_valid_ip(const char *ip, uint8_t *ip_bytes)
         return 1;
     if (inet_pton(AF_INET, ip, ip_bytes) != 1)
     {
-        fprintf(stderr, "ip: invalid address format\n");
         return 1;
     }
     return 0;
@@ -55,17 +54,21 @@ static  int     validate_args(const char **args, t_data *data)
     const char  *target_ip = args[2];
     const char  *target_mac = args[3];
     // step 1: check if valid ip
-    if (!js_valid_ip(src_ip, data->source_ip)){
+    if (is_valid_ip(src_ip, data->source_ip)){
+        fprintf(stderr, "source ip: invalid address format\n");
         return 1;
     }
-    if (!is_valid_ip(target_ip, data->target_ip)){
+    if (is_valid_ip(target_ip, data->target_ip)){
+        fprintf(stderr, "target ip: invalid address format\n");
         return 1;
     }
     // step 2: check if valid mac address
-    if (!is_valid_mac(src_mac, data->source_mac)){
+    if (is_valid_mac(src_mac, data->source_mac)){
+        fprintf(stderr, "source mac: invalid address format\n");
         return 1;
     }
-    if (!is_valid_mac(target_mac, data->target_mac)){
+    if (is_valid_mac(target_mac, data->target_mac)){
+        fprintf(stderr, "target mac: invalid address format\n");
         return 1;
     }
     return 0;
